@@ -501,6 +501,22 @@ func DialTimeout(d time.Duration) Option {
 	}
 }
 
+// ReadTimeout sets the timeout for every read operation.
+func ReadTimeout(d time.Duration) Option {
+	return func(cfg *Config) {
+		initDialer(cfg)
+		cfg.dialer.ReadTimeout = d
+	}
+}
+
+// WriteTimeout sets the timeout for every write operation.
+func WriteTimeout(d time.Duration) Option {
+	return func(cfg *Config) {
+		initDialer(cfg)
+		cfg.dialer.WriteTimeout = d
+	}
+}
+
 // MaxMessageSize sets the maximum message size for the UACP handshake.
 func MaxMessageSize(n uint32) Option {
 	return func(cfg *Config) {
